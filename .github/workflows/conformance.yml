@@ -39,9 +39,9 @@ jobs:
         name: "Cache local Maven repository"
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-extension-maven-1${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-extensions-maven${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            ${{ runner.os }}-extension-maven-1
+            ${{ runner.os }}-extensions-maven
       - name: "Build tools"
         run: |
           cd ./dubbo
@@ -90,9 +90,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-extension-maven-1${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-extensions-maven${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            ${{ runner.os }}-extension-maven-1
+            ${{ runner.os }}-extensions-maven
       - name: Download test list
         uses: actions/download-artifact@v2
         with:
