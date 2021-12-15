@@ -16,7 +16,7 @@ env:
   FORK_COUNT: 2
   FAIL_FAST: 0
   SHOW_ERROR_DETAIL: 1
-  BUILD_OPTS: --batch-mode --update-snapshots --no-transfer-progress  -Dmaven.wagon.http.retryHandler.count=3 clean package dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
+  BUILD_OPTS: --batch-mode --update-snapshots --no-transfer-progress clean package -DskipTests
 
 jobs:
   build-extensions:
@@ -49,7 +49,7 @@ jobs:
       - name: "Build with Maven"
         run: |
           cd ./dubbo-spi-extensions
-          ./mvnw --batch-mode --update-snapshots --no-transfer-progress -Dmaven.wagon.http.retryHandler.count=3 clean install dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
+          ./mvnw --batch-mode --update-snapshots --no-transfer-progress clean install -DskipTests
 
   prepare_test:
     name: "Prepare Test"
