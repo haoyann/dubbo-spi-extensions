@@ -16,7 +16,7 @@ env:
   FORK_COUNT: 2
   FAIL_FAST: 0
   SHOW_ERROR_DETAIL: 1
-  BUILD_OPTS: --batch-mode --no-snapshot-updates --no-transfer-progress  -Dmaven.wagon.http.retryHandler.count=3 clean package dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
+  BUILD_OPTS: --batch-mode --update-snapshots--no-transfer-progress  -Dmaven.wagon.http.retryHandler.count=3 clean package dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
 
 jobs:
   build-extensions:
@@ -39,9 +39,9 @@ jobs:
         name: "Cache local Maven repository"
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-extension-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            ${{ runner.os }}-extension-maven-
+            ${{ runner.os }}-maven-
       - name: "Build tools"
         run: |
           cd ./dubbo
@@ -49,7 +49,7 @@ jobs:
       - name: "Build with Maven"
         run: |
           cd ./dubbo-spi-extensions
-          ./mvnw --batch-mode --no-snapshot-updates --no-transfer-progress -Dmaven.wagon.http.retryHandler.count=3 clean install dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
+          ./mvnw --batch-mode --update-snapshots --no-transfer-progress -Dmaven.wagon.http.retryHandler.count=3 clean install dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
 
   prepare_test:
     name: "Prepare Test"
@@ -90,9 +90,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-extension-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            ${{ runner.os }}-extension-maven-
+            ${{ runner.os }}-maven-
       - name: Download test list
         uses: actions/download-artifact@v2
         with:
