@@ -49,7 +49,7 @@ jobs:
       - name: "Build with Maven"
         run: |
           cd ./dubbo-spi-extensions
-          ./mvnw --batch-mode --no-snapshot-updates --no-transfer-progress --settings .mvn/settings.xml -Dmaven.wagon.http.retryHandler.count=3 clean package dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
+          ./mvnw --batch-mode --no-snapshot-updates --no-transfer-progress --settings .mvn/settings.xml -Dmaven.wagon.http.retryHandler.count=3 clean install dependency:copy-dependencies -DskipTests -DskipIntegrationTests=true  -Drat.skip=true -Dmaven.javadoc.skip=true
 
   prepare_test:
     name: "Prepare Test"
